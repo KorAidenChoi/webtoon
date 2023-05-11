@@ -40,12 +40,13 @@ class ApiService {
     final url = Uri.parse("$baseUrl/$id/episodes");
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      final espisodes = jsonDecode(response.body);
-      for (var espisode in espisodes) {
-        episodesInstances.add(WebtoonEpisodeModel.fromJson(espisode));
+      final episodes = jsonDecode(response.body);
+      for (var episode in episodes) {
+        episodesInstances.add(WebtoonEpisodeModel.fromJson(episode));
       }
       return episodesInstances;
+    } else {
+      throw Error();
     }
-    throw Error();
   }
 }
